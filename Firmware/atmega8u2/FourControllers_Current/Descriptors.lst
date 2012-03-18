@@ -1,0 +1,573 @@
+   1               		.file	"Descriptors.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.global __do_copy_data
+   8               		.global __do_clear_bss
+  16               	.Ltext0:
+  17               		.section	.text.CALLBACK_USB_GetDescriptor,"ax",@progbits
+  18               	.global	CALLBACK_USB_GetDescriptor
+  20               	CALLBACK_USB_GetDescriptor:
+  21               	.LFB88:
+  22               	.LSM0:
+  23               	.LVL0:
+  24               	/* prologue: function */
+  25               	/* frame size = 0 */
+  26               	/* stack size = 0 */
+  27               	.L__stack_usage = 0
+  28               	.LSM1:
+  29 0000 9330      		cpi r25,lo8(3)
+  30 0002 01F0      		breq .L5
+  31 0004 9430      		cpi r25,lo8(4)
+  32 0006 00F4      		brsh .L8
+  33 0008 9130      		cpi r25,lo8(1)
+  34 000a 01F0      		breq .L12
+  35 000c 9230      		cpi r25,lo8(2)
+  36 000e 01F4      		brne .L14
+  37 0010 00C0      		rjmp .L16
+  38               	.L8:
+  39 0012 9132      		cpi r25,lo8(33)
+  40 0014 01F0      		breq .L6
+  41 0016 9232      		cpi r25,lo8(34)
+  42 0018 01F4      		brne .L14
+  43 001a 00C0      		rjmp .L7
+  44               	.L16:
+  45               	.LVL1:
+  46               	.LSM2:
+  47 001c 22E2      		ldi r18,lo8(34)
+  48 001e 30E0      		ldi r19,hi8(34)
+  49               	.LSM3:
+  50 0020 E0E0      		ldi r30,lo8(ConfigurationDescriptor)
+  51 0022 F0E0      		ldi r31,hi8(ConfigurationDescriptor)
+  52               	.LSM4:
+  53 0024 00C0      		rjmp .L3
+  54               	.LVL2:
+  55               	.L5:
+  56               	.LSM5:
+  57 0026 8130      		cpi r24,lo8(1)
+  58 0028 01F0      		breq .L10
+  59 002a 8130      		cpi r24,lo8(1)
+  60 002c 00F0      		brlo .L9
+  61 002e 8230      		cpi r24,lo8(2)
+  62 0030 01F4      		brne .L14
+  63 0032 00C0      		rjmp .L17
+  64               	.L9:
+  65               	.LVL3:
+  66               	.LBB2:
+  67               	.LSM6:
+  68 0034 E0E0      		ldi r30,lo8(LanguageString)
+  69 0036 F0E0      		ldi r31,hi8(LanguageString)
+  70 0038 00C0      		rjmp .L15
+  71               	.LVL4:
+  72               	.L10:
+  73               	.LBE2:
+  74               	.LBB3:
+  75               	.LSM7:
+  76 003a E0E0      		ldi r30,lo8(ManufacturerString)
+  77 003c F0E0      		ldi r31,hi8(ManufacturerString)
+  78 003e 00C0      		rjmp .L15
+  79               	.LVL5:
+  80               	.L17:
+  81               	.LBE3:
+  82               	.LBB4:
+  83               	.LSM8:
+  84 0040 E0E0      		ldi r30,lo8(ProductString)
+  85 0042 F0E0      		ldi r31,hi8(ProductString)
+  86               	.LVL6:
+  87               	.L15:
+  88               	/* #APP */
+  89               	 ;  382 "Descriptors.c" 1
+  90 0044 2491      		lpm r18, Z
+  91               		
+  92               	 ;  0 "" 2
+  93               	.LVL7:
+  94               	/* #NOAPP */
+  95               	.LBE4:
+  96 0046 30E0      		ldi r19,lo8(0)
+  97               	.LVL8:
+  98               	.LSM9:
+  99 0048 00C0      		rjmp .L3
+ 100               	.LVL9:
+ 101               	.L6:
+ 102               	.LSM10:
+ 103 004a 29E0      		ldi r18,lo8(9)
+ 104 004c 30E0      		ldi r19,hi8(9)
+ 105               	.LSM11:
+ 106 004e E0E0      		ldi r30,lo8(ConfigurationDescriptor+18)
+ 107 0050 F0E0      		ldi r31,hi8(ConfigurationDescriptor+18)
+ 108               	.LSM12:
+ 109 0052 00C0      		rjmp .L3
+ 110               	.LVL10:
+ 111               	.L7:
+ 112               	.LSM13:
+ 113 0054 24E4      		ldi r18,lo8(324)
+ 114 0056 31E0      		ldi r19,hi8(324)
+ 115               	.LSM14:
+ 116 0058 E0E0      		ldi r30,lo8(JoystickReport)
+ 117 005a F0E0      		ldi r31,hi8(JoystickReport)
+ 118               	.LSM15:
+ 119 005c 00C0      		rjmp .L3
+ 120               	.LVL11:
+ 121               	.L12:
+ 122               	.LSM16:
+ 123 005e 22E1      		ldi r18,lo8(18)
+ 124 0060 30E0      		ldi r19,hi8(18)
+ 125               	.LSM17:
+ 126 0062 E0E0      		ldi r30,lo8(DeviceDescriptor)
+ 127 0064 F0E0      		ldi r31,hi8(DeviceDescriptor)
+ 128 0066 00C0      		rjmp .L3
+ 129               	.L14:
+ 130               	.LSM18:
+ 131 0068 20E0      		ldi r18,lo8(0)
+ 132 006a 30E0      		ldi r19,hi8(0)
+ 133               	.LSM19:
+ 134 006c E0E0      		ldi r30,lo8(0)
+ 135 006e F0E0      		ldi r31,hi8(0)
+ 136               	.LVL12:
+ 137               	.L3:
+ 138               	.LSM20:
+ 139 0070 DA01      		movw r26,r20
+ 140 0072 1196      		adiw r26,1
+ 141 0074 FC93      		st X,r31
+ 142 0076 EE93      		st -X,r30
+ 143               	.LSM21:
+ 144 0078 C901      		movw r24,r18
+ 145               	.LVL13:
+ 146               	/* epilogue start */
+ 147 007a 0895      		ret
+ 148               	.LFE88:
+ 150               	.global	JoystickReport
+ 151               		.section	.progmem.data,"a",@progbits
+ 154               	JoystickReport:
+ 155 0000 05        		.byte	5
+ 156 0001 01        		.byte	1
+ 157 0002 09        		.byte	9
+ 158 0003 05        		.byte	5
+ 159 0004 A1        		.byte	-95
+ 160 0005 01        		.byte	1
+ 161 0006 A1        		.byte	-95
+ 162 0007 00        		.byte	0
+ 163 0008 85        		.byte	-123
+ 164 0009 01        		.byte	1
+ 165 000a 05        		.byte	5
+ 166 000b 09        		.byte	9
+ 167 000c 19        		.byte	25
+ 168 000d 01        		.byte	1
+ 169 000e 29        		.byte	41
+ 170 000f 05        		.byte	5
+ 171 0010 15        		.byte	21
+ 172 0011 00        		.byte	0
+ 173 0012 25        		.byte	37
+ 174 0013 01        		.byte	1
+ 175 0014 95        		.byte	-107
+ 176 0015 05        		.byte	5
+ 177 0016 75        		.byte	117
+ 178 0017 01        		.byte	1
+ 179 0018 81        		.byte	-127
+ 180 0019 02        		.byte	2
+ 181 001a 95        		.byte	-107
+ 182 001b 01        		.byte	1
+ 183 001c 75        		.byte	117
+ 184 001d 03        		.byte	3
+ 185 001e 81        		.byte	-127
+ 186 001f 03        		.byte	3
+ 187 0020 05        		.byte	5
+ 188 0021 09        		.byte	9
+ 189 0022 19        		.byte	25
+ 190 0023 06        		.byte	6
+ 191 0024 29        		.byte	41
+ 192 0025 0C        		.byte	12
+ 193 0026 15        		.byte	21
+ 194 0027 00        		.byte	0
+ 195 0028 25        		.byte	37
+ 196 0029 01        		.byte	1
+ 197 002a 95        		.byte	-107
+ 198 002b 07        		.byte	7
+ 199 002c 75        		.byte	117
+ 200 002d 01        		.byte	1
+ 201 002e 81        		.byte	-127
+ 202 002f 02        		.byte	2
+ 203 0030 95        		.byte	-107
+ 204 0031 01        		.byte	1
+ 205 0032 75        		.byte	117
+ 206 0033 01        		.byte	1
+ 207 0034 81        		.byte	-127
+ 208 0035 03        		.byte	3
+ 209 0036 05        		.byte	5
+ 210 0037 01        		.byte	1
+ 211 0038 09        		.byte	9
+ 212 0039 30        		.byte	48
+ 213 003a 09        		.byte	9
+ 214 003b 31        		.byte	49
+ 215 003c 09        		.byte	9
+ 216 003d 33        		.byte	51
+ 217 003e 09        		.byte	9
+ 218 003f 34        		.byte	52
+ 219 0040 09        		.byte	9
+ 220 0041 35        		.byte	53
+ 221 0042 09        		.byte	9
+ 222 0043 36        		.byte	54
+ 223 0044 15        		.byte	21
+ 224 0045 00        		.byte	0
+ 225 0046 26        		.byte	38
+ 226 0047 FF        		.byte	-1
+ 227 0048 00        		.byte	0
+ 228 0049 75        		.byte	117
+ 229 004a 08        		.byte	8
+ 230 004b 95        		.byte	-107
+ 231 004c 06        		.byte	6
+ 232 004d 81        		.byte	-127
+ 233 004e 02        		.byte	2
+ 234 004f C0        		.byte	-64
+ 235 0050 C0        		.byte	-64
+ 236 0051 05        		.byte	5
+ 237 0052 01        		.byte	1
+ 238 0053 09        		.byte	9
+ 239 0054 05        		.byte	5
+ 240 0055 A1        		.byte	-95
+ 241 0056 01        		.byte	1
+ 242 0057 A1        		.byte	-95
+ 243 0058 00        		.byte	0
+ 244 0059 85        		.byte	-123
+ 245 005a 02        		.byte	2
+ 246 005b 05        		.byte	5
+ 247 005c 09        		.byte	9
+ 248 005d 19        		.byte	25
+ 249 005e 01        		.byte	1
+ 250 005f 29        		.byte	41
+ 251 0060 05        		.byte	5
+ 252 0061 15        		.byte	21
+ 253 0062 00        		.byte	0
+ 254 0063 25        		.byte	37
+ 255 0064 01        		.byte	1
+ 256 0065 95        		.byte	-107
+ 257 0066 05        		.byte	5
+ 258 0067 75        		.byte	117
+ 259 0068 01        		.byte	1
+ 260 0069 81        		.byte	-127
+ 261 006a 02        		.byte	2
+ 262 006b 95        		.byte	-107
+ 263 006c 01        		.byte	1
+ 264 006d 75        		.byte	117
+ 265 006e 03        		.byte	3
+ 266 006f 81        		.byte	-127
+ 267 0070 03        		.byte	3
+ 268 0071 05        		.byte	5
+ 269 0072 09        		.byte	9
+ 270 0073 19        		.byte	25
+ 271 0074 06        		.byte	6
+ 272 0075 29        		.byte	41
+ 273 0076 0C        		.byte	12
+ 274 0077 15        		.byte	21
+ 275 0078 00        		.byte	0
+ 276 0079 25        		.byte	37
+ 277 007a 01        		.byte	1
+ 278 007b 95        		.byte	-107
+ 279 007c 07        		.byte	7
+ 280 007d 75        		.byte	117
+ 281 007e 01        		.byte	1
+ 282 007f 81        		.byte	-127
+ 283 0080 02        		.byte	2
+ 284 0081 95        		.byte	-107
+ 285 0082 01        		.byte	1
+ 286 0083 75        		.byte	117
+ 287 0084 01        		.byte	1
+ 288 0085 81        		.byte	-127
+ 289 0086 03        		.byte	3
+ 290 0087 05        		.byte	5
+ 291 0088 01        		.byte	1
+ 292 0089 09        		.byte	9
+ 293 008a 30        		.byte	48
+ 294 008b 09        		.byte	9
+ 295 008c 31        		.byte	49
+ 296 008d 09        		.byte	9
+ 297 008e 33        		.byte	51
+ 298 008f 09        		.byte	9
+ 299 0090 34        		.byte	52
+ 300 0091 09        		.byte	9
+ 301 0092 35        		.byte	53
+ 302 0093 09        		.byte	9
+ 303 0094 36        		.byte	54
+ 304 0095 15        		.byte	21
+ 305 0096 00        		.byte	0
+ 306 0097 26        		.byte	38
+ 307 0098 FF        		.byte	-1
+ 308 0099 00        		.byte	0
+ 309 009a 75        		.byte	117
+ 310 009b 08        		.byte	8
+ 311 009c 95        		.byte	-107
+ 312 009d 06        		.byte	6
+ 313 009e 81        		.byte	-127
+ 314 009f 02        		.byte	2
+ 315 00a0 C0        		.byte	-64
+ 316 00a1 C0        		.byte	-64
+ 317 00a2 05        		.byte	5
+ 318 00a3 01        		.byte	1
+ 319 00a4 09        		.byte	9
+ 320 00a5 05        		.byte	5
+ 321 00a6 A1        		.byte	-95
+ 322 00a7 01        		.byte	1
+ 323 00a8 A1        		.byte	-95
+ 324 00a9 00        		.byte	0
+ 325 00aa 85        		.byte	-123
+ 326 00ab 03        		.byte	3
+ 327 00ac 05        		.byte	5
+ 328 00ad 09        		.byte	9
+ 329 00ae 19        		.byte	25
+ 330 00af 01        		.byte	1
+ 331 00b0 29        		.byte	41
+ 332 00b1 05        		.byte	5
+ 333 00b2 15        		.byte	21
+ 334 00b3 00        		.byte	0
+ 335 00b4 25        		.byte	37
+ 336 00b5 01        		.byte	1
+ 337 00b6 95        		.byte	-107
+ 338 00b7 05        		.byte	5
+ 339 00b8 75        		.byte	117
+ 340 00b9 01        		.byte	1
+ 341 00ba 81        		.byte	-127
+ 342 00bb 02        		.byte	2
+ 343 00bc 95        		.byte	-107
+ 344 00bd 01        		.byte	1
+ 345 00be 75        		.byte	117
+ 346 00bf 03        		.byte	3
+ 347 00c0 81        		.byte	-127
+ 348 00c1 03        		.byte	3
+ 349 00c2 05        		.byte	5
+ 350 00c3 09        		.byte	9
+ 351 00c4 19        		.byte	25
+ 352 00c5 06        		.byte	6
+ 353 00c6 29        		.byte	41
+ 354 00c7 0C        		.byte	12
+ 355 00c8 15        		.byte	21
+ 356 00c9 00        		.byte	0
+ 357 00ca 25        		.byte	37
+ 358 00cb 01        		.byte	1
+ 359 00cc 95        		.byte	-107
+ 360 00cd 07        		.byte	7
+ 361 00ce 75        		.byte	117
+ 362 00cf 01        		.byte	1
+ 363 00d0 81        		.byte	-127
+ 364 00d1 02        		.byte	2
+ 365 00d2 95        		.byte	-107
+ 366 00d3 01        		.byte	1
+ 367 00d4 75        		.byte	117
+ 368 00d5 01        		.byte	1
+ 369 00d6 81        		.byte	-127
+ 370 00d7 03        		.byte	3
+ 371 00d8 05        		.byte	5
+ 372 00d9 01        		.byte	1
+ 373 00da 09        		.byte	9
+ 374 00db 30        		.byte	48
+ 375 00dc 09        		.byte	9
+ 376 00dd 31        		.byte	49
+ 377 00de 09        		.byte	9
+ 378 00df 33        		.byte	51
+ 379 00e0 09        		.byte	9
+ 380 00e1 34        		.byte	52
+ 381 00e2 09        		.byte	9
+ 382 00e3 35        		.byte	53
+ 383 00e4 09        		.byte	9
+ 384 00e5 36        		.byte	54
+ 385 00e6 15        		.byte	21
+ 386 00e7 00        		.byte	0
+ 387 00e8 26        		.byte	38
+ 388 00e9 FF        		.byte	-1
+ 389 00ea 00        		.byte	0
+ 390 00eb 75        		.byte	117
+ 391 00ec 08        		.byte	8
+ 392 00ed 95        		.byte	-107
+ 393 00ee 06        		.byte	6
+ 394 00ef 81        		.byte	-127
+ 395 00f0 02        		.byte	2
+ 396 00f1 C0        		.byte	-64
+ 397 00f2 C0        		.byte	-64
+ 398 00f3 05        		.byte	5
+ 399 00f4 01        		.byte	1
+ 400 00f5 09        		.byte	9
+ 401 00f6 05        		.byte	5
+ 402 00f7 A1        		.byte	-95
+ 403 00f8 01        		.byte	1
+ 404 00f9 A1        		.byte	-95
+ 405 00fa 00        		.byte	0
+ 406 00fb 85        		.byte	-123
+ 407 00fc 04        		.byte	4
+ 408 00fd 05        		.byte	5
+ 409 00fe 09        		.byte	9
+ 410 00ff 19        		.byte	25
+ 411 0100 01        		.byte	1
+ 412 0101 29        		.byte	41
+ 413 0102 05        		.byte	5
+ 414 0103 15        		.byte	21
+ 415 0104 00        		.byte	0
+ 416 0105 25        		.byte	37
+ 417 0106 01        		.byte	1
+ 418 0107 95        		.byte	-107
+ 419 0108 05        		.byte	5
+ 420 0109 75        		.byte	117
+ 421 010a 01        		.byte	1
+ 422 010b 81        		.byte	-127
+ 423 010c 02        		.byte	2
+ 424 010d 95        		.byte	-107
+ 425 010e 01        		.byte	1
+ 426 010f 75        		.byte	117
+ 427 0110 03        		.byte	3
+ 428 0111 81        		.byte	-127
+ 429 0112 03        		.byte	3
+ 430 0113 05        		.byte	5
+ 431 0114 09        		.byte	9
+ 432 0115 19        		.byte	25
+ 433 0116 06        		.byte	6
+ 434 0117 29        		.byte	41
+ 435 0118 0C        		.byte	12
+ 436 0119 15        		.byte	21
+ 437 011a 00        		.byte	0
+ 438 011b 25        		.byte	37
+ 439 011c 01        		.byte	1
+ 440 011d 95        		.byte	-107
+ 441 011e 07        		.byte	7
+ 442 011f 75        		.byte	117
+ 443 0120 01        		.byte	1
+ 444 0121 81        		.byte	-127
+ 445 0122 02        		.byte	2
+ 446 0123 95        		.byte	-107
+ 447 0124 01        		.byte	1
+ 448 0125 75        		.byte	117
+ 449 0126 01        		.byte	1
+ 450 0127 81        		.byte	-127
+ 451 0128 03        		.byte	3
+ 452 0129 05        		.byte	5
+ 453 012a 01        		.byte	1
+ 454 012b 09        		.byte	9
+ 455 012c 30        		.byte	48
+ 456 012d 09        		.byte	9
+ 457 012e 31        		.byte	49
+ 458 012f 09        		.byte	9
+ 459 0130 33        		.byte	51
+ 460 0131 09        		.byte	9
+ 461 0132 34        		.byte	52
+ 462 0133 09        		.byte	9
+ 463 0134 35        		.byte	53
+ 464 0135 09        		.byte	9
+ 465 0136 36        		.byte	54
+ 466 0137 15        		.byte	21
+ 467 0138 00        		.byte	0
+ 468 0139 26        		.byte	38
+ 469 013a FF        		.byte	-1
+ 470 013b 00        		.byte	0
+ 471 013c 75        		.byte	117
+ 472 013d 08        		.byte	8
+ 473 013e 95        		.byte	-107
+ 474 013f 06        		.byte	6
+ 475 0140 81        		.byte	-127
+ 476 0141 02        		.byte	2
+ 477 0142 C0        		.byte	-64
+ 478 0143 C0        		.byte	-64
+ 479               	.global	DeviceDescriptor
+ 482               	DeviceDescriptor:
+ 483 0144 12        		.byte	18
+ 484 0145 01        		.byte	1
+ 485 0146 1001      		.word	272
+ 486 0148 00        		.byte	0
+ 487 0149 00        		.byte	0
+ 488 014a 00        		.byte	0
+ 489 014b 08        		.byte	8
+ 490 014c EB03      		.word	1003
+ 491 014e 4320      		.word	8259
+ 492 0150 0000      		.word	0
+ 493 0152 01        		.byte	1
+ 494 0153 02        		.byte	2
+ 495 0154 00        		.byte	0
+ 496 0155 01        		.byte	1
+ 497               	.global	ConfigurationDescriptor
+ 500               	ConfigurationDescriptor:
+ 501 0156 09        		.byte	9
+ 502 0157 02        		.byte	2
+ 503 0158 2200      		.word	34
+ 504 015a 01        		.byte	1
+ 505 015b 01        		.byte	1
+ 506 015c 00        		.byte	0
+ 507 015d 80        		.byte	-128
+ 508 015e 32        		.byte	50
+ 509 015f 09        		.byte	9
+ 510 0160 04        		.byte	4
+ 511 0161 00        		.byte	0
+ 512 0162 00        		.byte	0
+ 513 0163 01        		.byte	1
+ 514 0164 03        		.byte	3
+ 515 0165 00        		.byte	0
+ 516 0166 00        		.byte	0
+ 517 0167 00        		.byte	0
+ 518 0168 09        		.byte	9
+ 519 0169 21        		.byte	33
+ 520 016a 1101      		.word	273
+ 521 016c 00        		.byte	0
+ 522 016d 01        		.byte	1
+ 523 016e 22        		.byte	34
+ 524 016f 4401      		.word	324
+ 525 0171 07        		.byte	7
+ 526 0172 05        		.byte	5
+ 527 0173 81        		.byte	-127
+ 528 0174 03        		.byte	3
+ 529 0175 0800      		.word	8
+ 530 0177 01        		.byte	1
+ 531               	.global	LanguageString
+ 534               	LanguageString:
+ 535 0178 04        		.byte	4
+ 536 0179 03        		.byte	3
+ 537 017a 0904      		.word	1033
+ 538               	.global	ManufacturerString
+ 541               	ManufacturerString:
+ 542 017c 0C        		.byte	12
+ 543 017d 03        		.byte	3
+ 544 017e 4600      		.string	"F"
+ 545 0180 6900      		.string	"i"
+ 546 0182 7A00      		.string	"z"
+ 547 0184 7A00      		.string	"z"
+ 548 0186 6900      		.string	"i"
+ 549 0188 00        		.string	""
+ 550 0189 00        		.string	""
+ 551               	.global	ProductString
+ 554               	ProductString:
+ 555 018a 24        		.byte	36
+ 556 018b 03        		.byte	3
+ 557 018c 4600      		.string	"F"
+ 558 018e 6900      		.string	"i"
+ 559 0190 7A00      		.string	"z"
+ 560 0192 7A00      		.string	"z"
+ 561 0194 6900      		.string	"i"
+ 562 0196 2700      		.string	"'"
+ 563 0198 7300      		.string	"s"
+ 564 019a 2000      		.string	" "
+ 565 019c 4700      		.string	"G"
+ 566 019e 4300      		.string	"C"
+ 567 01a0 2000      		.string	" "
+ 568 01a2 7400      		.string	"t"
+ 569 01a4 6F00      		.string	"o"
+ 570 01a6 2000      		.string	" "
+ 571 01a8 5500      		.string	"U"
+ 572 01aa 5300      		.string	"S"
+ 573 01ac 4200      		.string	"B"
+ 574 01ae 00        		.string	""
+ 575 01af 00        		.string	""
+ 600               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Descriptors.c
+     /tmp/cc0ICsed.s:2      *ABS*:000000000000003f __SREG__
+     /tmp/cc0ICsed.s:3      *ABS*:000000000000003e __SP_H__
+     /tmp/cc0ICsed.s:4      *ABS*:000000000000003d __SP_L__
+     /tmp/cc0ICsed.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/cc0ICsed.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/cc0ICsed.s:20     .text.CALLBACK_USB_GetDescriptor:0000000000000000 CALLBACK_USB_GetDescriptor
+     /tmp/cc0ICsed.s:500    .progmem.data:0000000000000156 ConfigurationDescriptor
+     /tmp/cc0ICsed.s:534    .progmem.data:0000000000000178 LanguageString
+     /tmp/cc0ICsed.s:541    .progmem.data:000000000000017c ManufacturerString
+     /tmp/cc0ICsed.s:554    .progmem.data:000000000000018a ProductString
+     /tmp/cc0ICsed.s:154    .progmem.data:0000000000000000 JoystickReport
+     /tmp/cc0ICsed.s:482    .progmem.data:0000000000000144 DeviceDescriptor
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
