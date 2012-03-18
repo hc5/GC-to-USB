@@ -44,7 +44,7 @@
  *  more details on HID report descriptors.
  */
 USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
-{				
+{		
 	0x05, 0x01,				// USAGE_PAGE (Generic Desktop)
 	0x09, 0x05,				// USAGE (Game Pad)
 	0xa1, 0x01,				// COLLECTION (Application)
@@ -127,8 +127,35 @@ USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 	0x95, 0x06,				//        REPORT_COUNT (6)
 	0x81, 0x02,				//        INPUT (Data,Var,Abs)
 	0xc0,					//    END COLLECTION
-	0xc0					// END COLLECTION
+	0xc0,					// END COLLECTION
 
+	0x05, 0x01,				// USAGE_PAGE (Generic Desktop)
+	0x09, 0x05,				// USAGE (Game Pad)
+	0xa1, 0x01,				// COLLECTION (Application)
+	0xa1, 0x00,				//    COLLECTION (Physical)
+	0x85, 0x04,             		//    	  REPORT_ID (4)
+	0x05, 0x09,				//        USAGE_PAGE (Button)
+	0x19, 0x01,				//        USAGE_MINIMUM (Button 1)
+	0x29, 0x10,				//        USAGE_MAXIMUM (Button 16)
+	0x15, 0x00,				//        LOGICAL_MINIMUM (0)
+	0x25, 0x01,				//        LOGICAL_MAXIMUM (1)
+	0x95, 0x10,				//        REPORT_COUNT (16)
+	0x75, 0x01,				//        REPORT_SIZE (1)
+	0x81, 0x02,				//        INPUT (Data,Var,Abs)
+	0x05, 0x01,				//        USAGE_PAGE (Generic Desktop)
+	0x09, 0x30,				//        USAGE (X)
+	0x09, 0x31,				//        USAGE (Y)
+	0x09, 0x33,				//        USAGE (Rx)
+	0x09, 0x34,				//        USAGE (Ry)
+	0x09, 0x35,				//	  USAGE (Rz)	
+	0x09, 0x36,				//	  USAGE (Slider)
+	0x15, 0x00,				//        LOGICAL_MINIMUM (0)
+	0x26, 0xFF, 0x00,			//        LOGICAL_MAXIMUM (255)
+	0x75, 0x08,				//        REPORT_SIZE (8)
+	0x95, 0x06,				//        REPORT_COUNT (6)
+	0x81, 0x02,				//        INPUT (Data,Var,Abs)
+	0xc0,					//    END COLLECTION
+	0xc0					// END COLLECTION
 };
 
 /** Device descriptor structure. This descriptor, located in FLASH memory, describes the overall
@@ -175,7 +202,7 @@ USB_Descriptor_Configuration_t PROGMEM ConfigurationDescriptor =
 			.ConfigurationNumber    = 1,
 			.ConfigurationStrIndex  = NO_DESCRIPTOR,
 				
-			.ConfigAttributes       = (USB_CONFIG_ATTR_BUSPOWERED | USB_CONFIG_ATTR_SELFPOWERED),
+			.ConfigAttributes       = USB_CONFIG_ATTR_BUSPOWERED,
 			
 			.MaxPowerConsumption    = USB_CONFIG_POWER_MA(100)
 		},
@@ -191,14 +218,14 @@ USB_Descriptor_Configuration_t PROGMEM ConfigurationDescriptor =
 				
 			.Class                  = 0x03,
 			.SubClass               = 0x00,
-			.Protocol               = HID_NON_BOOT_PROTOCOL,
+			.Protocol               = 0x00,
 				
 			.InterfaceStrIndex      = NO_DESCRIPTOR
 		},
 
 	.HID_JoystickHID = 
 		{
-			.Header                 = {.Size = sizeof(USB_HID_Descriptor_t), .Type = DTYPE_HID},
+			.Header                 = {.Size = sizeof(USB_HID_Descriptor_HID_t), .Type = HID_DTYPE_HID},
 			
 			.HIDSpec                = VERSION_BCD(01.11),
 			.CountryCode            = 0x00,
@@ -209,7 +236,7 @@ USB_Descriptor_Configuration_t PROGMEM ConfigurationDescriptor =
 
 
 			.TotalReportDescriptors = 1,
-			.HIDReportType          = DTYPE_Report,
+			.HIDReportType          = HID_DTYPE_Report,
 			.HIDReportLength        = sizeof(JoystickReport)
 		},
 
@@ -265,7 +292,7 @@ USB_Descriptor_String_t PROGMEM ProductString =
  */
 uint16_t CALLBACK_USB_GetDescriptor(const uint16_t wValue,
                                     const uint8_t wIndex,
-                                    void** const DescriptorAddress)
+                                    const void** const DescriptorAddress)
 {
 	const uint8_t  DescriptorType   = (wValue >> 8);
 	const uint8_t  DescriptorNumber = (wValue & 0xFF);
@@ -301,11 +328,11 @@ uint16_t CALLBACK_USB_GetDescriptor(const uint16_t wValue,
 			}
 			
 			break;
-		case DTYPE_HID: 
+		case HID_DTYPE_HID: 
 			Address = (void*)&ConfigurationDescriptor.HID_JoystickHID;
-			Size    = sizeof(USB_HID_Descriptor_t);
+			Size    = sizeof(USB_HID_Descriptor_HID_t);
 			break;
-		case DTYPE_Report: 
+		case HID_DTYPE_Report: 
 			Address = (void*)&JoystickReport;
 			Size    = sizeof(JoystickReport);
 			break;

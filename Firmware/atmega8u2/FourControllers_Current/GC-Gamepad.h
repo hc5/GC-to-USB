@@ -44,10 +44,11 @@
 
 #include "Descriptors.h"
 
-#include "Lib/LightweightRingBuff.h"
+//#include "Lib/LightweightRingBuff.h"
 
+#include <LUFA/Drivers/Misc/RingBuffer.h>
 #include <LUFA/Version.h>
-#include <LUFA/Drivers/Board/LEDs.h>
+//#include <LUFA/Drivers/Board/LEDs.h>
 #include <LUFA/Drivers/Peripheral/Serial.h>
 #include <LUFA/Drivers/USB/USB.h>
 #include <LUFA/Drivers/USB/Class/CDC.h>
@@ -56,7 +57,6 @@
  *  This mirrors the layout described to the host in the HID report descriptor, in Descriptors.c.
  */
 typedef struct {
-  uint8_t reportid;
   uint8_t buttons1;
   uint8_t buttons2;
   uint8_t joystickx;
@@ -65,7 +65,7 @@ typedef struct {
   uint8_t csticky;
   uint8_t ltrigger;
   uint8_t rtrigger;
-} USB_JoystickReport_Data_t;
+} USB_JoystickReport_Data_t;	
 
 /* Function Prototypes: */
 void SetupHardware(void);

@@ -59,7 +59,7 @@
  *  the project and is responsible for the initial application hardware configuration.
  */
 
-#include "Arduino-joystick.h"
+#include "GC-Gamepad.h"
 
 /** Buffer to hold the previously generated HID report, for comparison purposes inside the HID class driver. */
 uint8_t PrevJoystickHIDReportBuffer[sizeof(USB_JoystickReport_Data_t)];
@@ -87,10 +87,8 @@ USB_ClassInfo_HID_Device_t Joystick_HID_Interface = {
  */
 
 /** Circular buffer to hold data from the serial port before it is sent to the host. */
-RingBuff_t USARTtoUSB_Buffer;
-
-#define LED_ON_TICKS 2000	/* Number of ticks to leave LEDs on */
-volatile int led1_ticks = 0;
+RingBuffer_t USARTtoUSB_Buffer;
+uint8_t      BufferData[72]; //Allows for 8 controller reports. 9 * 8
 
 /** Main program entry point. This routine contains the overall program flow, including initial
  *  setup of all components and the main program loop.
@@ -99,21 +97,13 @@ int main(void)
 {
     SetupHardware();
 
-    RingBuffer_InitBuffer(&USARTtoUSB_Buffer);
+    RingBuffer_InitBuffer(&USARTtoUSB_Buffer, BufferData, sizeof(BufferData));
 
     sei();
 
     for (;;) {
 	HID_Device_USBTask(&Joystick_HID_Interface);
 	USB_USBTask();
-
-	/* Turn off the Tx LED when the tick count reaches zero */
-	if (led1_ticks) {
-	    led1_ticks--;
-	    if (led1_ticks == 0) {
-		LEDs_TurnOffLEDs(LEDS_LED1);
-	    }
-	}
     }
 }
 
@@ -126,7 +116,6 @@ void SetupHardware(void)
 
     /* Hardware Initialization */
     Serial_Init(115200, true);
-    LEDs_Init();
     USB_Init();
 
     UCSR1B = ((1 << RXCIE1) | (1 << TXEN1) | (1 << RXEN1));
@@ -179,9 +168,6 @@ bool CALLBACK_HID_Device_CreateHIDReport(
 
    for (uint8_t i = 0; i < sizeof(USB_JoystickReport_Data_t); i++)
        JoystickReport[i] = RingBuffer_Remove(&USARTtoUSB_Buffer);
-
-   LEDs_TurnOnLEDs(LEDS_LED1);
-   led1_ticks = LED_ON_TICKS;
 
    return false;
 }
