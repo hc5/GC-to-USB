@@ -1,0 +1,17 @@
+#! /bin/bash
+
+echo "Read atmega328p fuses? Ensure the programmer is correctly plugged in before saying yes."
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) sudo avrdude -c usbtiny -b 19200 -p atmega328p -U lfuse:r:328low:i -U hfuse:r:328high:i -U efuse:r:328ext:i; break;;
+        No ) break;;
+    esac
+done
+
+echo "Read atmega8u2 fuses? Ensure the programmer is correctly plugged in before saying yes."
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) sudo avrdude -c usbtiny -F -b 19200 -p at90usb82 -U lfuse:r:8u2low:i -U hfuse:r:8u2high:i -U efuse:r:8u2ext:i; break;;
+        No ) exit;;
+    esac
+done

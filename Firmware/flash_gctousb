@@ -1,0 +1,25 @@
+#! /bin/bash
+
+echo "Flash atmega328p? Ensure the programmer is correctly plugged in before saying yes."
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) 
+		sudo avrdude -b 19200 -c usbtiny -F -p m328p -v -e -U efuse:w:0x05:m -U hfuse:w:0xD6:m -U lfuse:w:0xF7:m;
+		sudo avrdude -c usbtiny -F -B 1 -p atmega328p -U flash:w:atmega328p/FourControllers_v1_1/FourControllers_v1_1.cpp.hex; 
+		break;;
+        No ) break;;
+    esac
+done
+
+echo "Flash atmega8u2? Ensure the programmer is correctly plugged in before saying yes."
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) 
+		sudo avrdude -c usbtiny -F -b 19200 -p at90usb82 -v -e -U efuse:w:0xF4:m -U hfuse:w:0xD9:m -U lfuse:w:0xEF:m;
+		sudo avrdude -c usbtiny -F -B 1 -p at90usb82 -U flash:w:atmega8u2/FourControllers_v1/Arduino-joystick.hex; 
+		break;;
+        No ) exit;;
+    esac
+done
+
+

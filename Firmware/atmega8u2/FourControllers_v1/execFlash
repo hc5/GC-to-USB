@@ -1,0 +1,2 @@
+#! /bin/bash
+sudo avrdude -c usbtiny -F -B 1 -p at90usb82 -U flash:w:Arduino-joystick.hex

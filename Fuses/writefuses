@@ -1,0 +1,17 @@
+#! /bin/bash
+
+echo "Set atmega328p fuses? Ensure the programmer is correctly plugged in before saying yes."
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) sudo avrdude -b 19200 -c usbtiny -p m328p -v -e -U efuse:w:0x05:m -U hfuse:w:0xD6:m -U lfuse:w:0xFF:m; break;;
+        No ) break;;
+    esac
+done
+
+echo "Set atmega8u2 fuses? Ensure the programmer is correctly plugged in before saying yes."
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) sudo avrdude -c usbtiny -F -b 19200 -p at90usb82 -v -e -U efuse:w:0xF4:m -U hfuse:w:0xD9:m -U lfuse:w:0xEF:m; break;;
+        No ) exit;;
+    esac
+done

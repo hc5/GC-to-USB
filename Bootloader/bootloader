@@ -1,0 +1,12 @@
+#! /bin/bash
+
+echo "Burn arduino bootloader and set fuses? Ensure the programmer is correctly plugged in before saying yes."
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) 
+		sudo avrdude -b 19200 -c usbtiny -p m328p -v -e -U efuse:w:0x05:m -U hfuse:w:0xD6:m -U lfuse:w:0xFF:m; 
+		sudo avrdude -b 19200 -c usbtiny -p m328p -v -e -U flash:w:BootLoader328REV3_firmata.hex -U lock:w:0x0F:m;
+		break;;
+        No ) break;;
+    esac
+done

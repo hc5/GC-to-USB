@@ -1,0 +1,635 @@
+   1               		.file	"Arduino-joystick.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.global __do_copy_data
+   8               		.global __do_clear_bss
+  16               	.Ltext0:
+  17               		.section	.text.RingBuffer_Remove.clone.1,"ax",@progbits
+  19               	RingBuffer_Remove.clone.1:
+  20               	.LFB111:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	/* stack size = 0 */
+  25               	.L__stack_usage = 0
+  26               	.LVL0:
+  27               	.LSM1:
+  28 0000 E0E0      		ldi r30,lo8(USARTtoUSB_Buffer)
+  29 0002 F0E0      		ldi r31,hi8(USARTtoUSB_Buffer)
+  30               	.LVL1:
+  31               	.LSM2:
+  32 0004 A281      		ldd r26,Z+2
+  33 0006 B381      		ldd r27,Z+3
+  34 0008 8D91      		ld r24,X+
+  35               	.LVL2:
+  36               	.LSM3:
+  37 000a B383      		std Z+3,r27
+  38 000c A283      		std Z+2,r26
+  39 000e 2681      		ldd r18,Z+6
+  40 0010 3781      		ldd r19,Z+7
+  41 0012 A217      		cp r26,r18
+  42 0014 B307      		cpc r27,r19
+  43 0016 01F4      		brne .L2
+  44               	.LSM4:
+  45 0018 2481      		ldd r18,Z+4
+  46 001a 3581      		ldd r19,Z+5
+  47 001c 3383      		std Z+3,r19
+  48 001e 2283      		std Z+2,r18
+  49               	.L2:
+  50               	.LBB103:
+  51               	.LBB104:
+  52               	.LSM5:
+  53               	.LSM6:
+  54 0020 9FB7      		in r25,__SREG__
+  55               	.LBE104:
+  56               	.LBE103:
+  57               	.LBB105:
+  58               	.LBB106:
+  59               	.LSM7:
+  60               	.LSM8:
+  61               	/* #APP */
+  62               	 ;  385 "../../../Public/LUFA110528/LUFA/Drivers/USB/../../Common/Common.h" 1
+  63 0022 F894      		cli
+  64               	 ;  0 "" 2
+  65               	.LSM9:
+  66               	/* #NOAPP */
+  67               	.LBE106:
+  68               	.LBE105:
+  69               	.LSM10:
+  70 0024 2185      		ldd r18,Z+9
+  71 0026 3285      		ldd r19,Z+10
+  72 0028 2150      		subi r18,lo8(-(-1))
+  73 002a 3040      		sbci r19,hi8(-(-1))
+  74 002c 3287      		std Z+10,r19
+  75 002e 2187      		std Z+9,r18
+  76               	.LVL3:
+  77               	.LBB107:
+  78               	.LBB108:
+  79               	.LSM11:
+  80               	.LSM12:
+  81 0030 9FBF      		out __SREG__,r25
+  82               	.LSM13:
+  83               	/* epilogue start */
+  84               	.LBE108:
+  85               	.LBE107:
+  86               	.LSM14:
+  87 0032 0895      		ret
+  88               	.LFE111:
+  90               		.section	.text.SetupHardware,"ax",@progbits
+  91               	.global	SetupHardware
+  93               	SetupHardware:
+  94               	.LFB103:
+  95               	.LSM15:
+  96 0000 CF93      		push r28
+  97 0002 DF93      		push r29
+  98               	/* prologue: function */
+  99               	/* frame size = 0 */
+ 100               	/* stack size = 2 */
+ 101               	.L__stack_usage = 2
+ 102               	.LSM16:
+ 103 0004 84B7      		in r24,84-0x20
+ 104 0006 877F      		andi r24,lo8(-9)
+ 105 0008 84BF      		out 84-0x20,r24
+ 106               	.LSM17:
+ 107 000a 28E1      		ldi r18,lo8(24)
+ 108               	/* #APP */
+ 109               	 ;  115 "Arduino-joystick.c" 1
+ 110 000c 0FB6      		in __tmp_reg__, __SREG__
+ 111 000e F894      		cli
+ 112 0010 2093 6000 		sts 96, r18
+ 113 0014 1092 6000 		sts 96, __zero_reg__
+ 114 0018 0FBE      		out __SREG__,__tmp_reg__
+ 115               		
+ 116               	 ;  0 "" 2
+ 117               	.LVL4:
+ 118               	/* #NOAPP */
+ 119               	.LBB109:
+ 120               	.LBB110:
+ 121               	.LSM18:
+ 122 001a 80E1      		ldi r24,lo8(16)
+ 123 001c 90E0      		ldi r25,hi8(16)
+ 124 001e 9093 CD00 		sts 204+1,r25
+ 125 0022 8093 CC00 		sts 204,r24
+ 126               	.LSM19:
+ 127 0026 86E0      		ldi r24,lo8(6)
+ 128 0028 8093 CA00 		sts 202,r24
+ 129               	.LSM20:
+ 130 002c 82E0      		ldi r24,lo8(2)
+ 131 002e 8093 C800 		sts 200,r24
+ 132               	.LSM21:
+ 133 0032 C9EC      		ldi r28,lo8(201)
+ 134 0034 D0E0      		ldi r29,hi8(201)
+ 135 0036 2883      		st Y,r18
+ 136               	.LSM22:
+ 137 0038 539A      		sbi 42-0x20,3
+ 138               	.LSM23:
+ 139 003a 5A9A      		sbi 43-0x20,2
+ 140               	.LBE110:
+ 141               	.LBE109:
+ 142               	.LSM24:
+ 143 003c 0E94 0000 		call USB_Init
+ 144               	.LSM25:
+ 145 0040 88E9      		ldi r24,lo8(-104)
+ 146 0042 8883      		st Y,r24
+ 147               	/* epilogue start */
+ 148               	.LSM26:
+ 149 0044 DF91      		pop r29
+ 150 0046 CF91      		pop r28
+ 151 0048 0895      		ret
+ 152               	.LFE103:
+ 154               		.section	.text.main,"ax",@progbits
+ 155               	.global	main
+ 157               	main:
+ 158               	.LFB102:
+ 159               	.LSM27:
+ 160               	/* prologue: function */
+ 161               	/* frame size = 0 */
+ 162               	/* stack size = 0 */
+ 163               	.L__stack_usage = 0
+ 164               	.LSM28:
+ 165 0000 0E94 0000 		call SetupHardware
+ 166               	.LVL5:
+ 167               	.LBB111:
+ 168               	.LBB112:
+ 169               	.LSM29:
+ 170 0004 E0E0      		ldi r30,lo8(USARTtoUSB_Buffer)
+ 171 0006 F0E0      		ldi r31,hi8(USARTtoUSB_Buffer)
+ 172               	.LVL6:
+ 173               	.LBB113:
+ 174               	.LBB114:
+ 175               	.LSM30:
+ 176               	.LSM31:
+ 177 0008 2FB7      		in r18,__SREG__
+ 178               	.LBE114:
+ 179               	.LBE113:
+ 180               	.LBB115:
+ 181               	.LBB116:
+ 182               	.LSM32:
+ 183               	.LSM33:
+ 184               	/* #APP */
+ 185               	 ;  385 "../../../Public/LUFA110528/LUFA/Drivers/USB/../../Common/Common.h" 1
+ 186 000a F894      		cli
+ 187               	 ;  0 "" 2
+ 188               	.LSM34:
+ 189               	/* #NOAPP */
+ 190               	.LBE116:
+ 191               	.LBE115:
+ 192               	.LSM35:
+ 193 000c 80E0      		ldi r24,lo8(BufferData)
+ 194 000e 90E0      		ldi r25,hi8(BufferData)
+ 195 0010 9183      		std Z+1,r25
+ 196 0012 8083      		st Z,r24
+ 197               	.LSM36:
+ 198 0014 9383      		std Z+3,r25
+ 199 0016 8283      		std Z+2,r24
+ 200               	.LSM37:
+ 201 0018 9583      		std Z+5,r25
+ 202 001a 8483      		std Z+4,r24
+ 203               	.LSM38:
+ 204 001c 80E0      		ldi r24,lo8(BufferData+72)
+ 205 001e 90E0      		ldi r25,hi8(BufferData+72)
+ 206 0020 9783      		std Z+7,r25
+ 207 0022 8683      		std Z+6,r24
+ 208               	.LSM39:
+ 209 0024 88E4      		ldi r24,lo8(72)
+ 210 0026 8087      		std Z+8,r24
+ 211               	.LSM40:
+ 212 0028 1286      		std Z+10,__zero_reg__
+ 213 002a 1186      		std Z+9,__zero_reg__
+ 214               	.LVL7:
+ 215               	.LBB117:
+ 216               	.LBB118:
+ 217               	.LSM41:
+ 218               	.LSM42:
+ 219 002c 2FBF      		out __SREG__,r18
+ 220               	.LSM43:
+ 221               	.LBE118:
+ 222               	.LBE117:
+ 223               	.LBE112:
+ 224               	.LBE111:
+ 225               	.LSM44:
+ 226               	/* #APP */
+ 227               	 ;  102 "Arduino-joystick.c" 1
+ 228 002e 7894      		sei
+ 229               	 ;  0 "" 2
+ 230               	.LVL8:
+ 231               	/* #NOAPP */
+ 232               	.L5:
+ 233               	.LSM45:
+ 234 0030 80E0      		ldi r24,lo8(Joystick_HID_Interface)
+ 235 0032 90E0      		ldi r25,hi8(Joystick_HID_Interface)
+ 236 0034 0E94 0000 		call HID_Device_USBTask
+ 237               	.LSM46:
+ 238 0038 0E94 0000 		call USB_USBTask
+ 239 003c 00C0      		rjmp .L5
+ 240               	.LFE102:
+ 242               		.section	.text.EVENT_USB_Device_ConfigurationChanged,"ax",@progbits
+ 243               	.global	EVENT_USB_Device_ConfigurationChanged
+ 245               	EVENT_USB_Device_ConfigurationChanged:
+ 246               	.LFB104:
+ 247               	.LSM47:
+ 248               	/* prologue: function */
+ 249               	/* frame size = 0 */
+ 250               	/* stack size = 0 */
+ 251               	.L__stack_usage = 0
+ 252               	.LSM48:
+ 253 0000 80E0      		ldi r24,lo8(Joystick_HID_Interface)
+ 254 0002 90E0      		ldi r25,hi8(Joystick_HID_Interface)
+ 255 0004 0E94 0000 		call HID_Device_ConfigureEndpoints
+ 256               	.LVL9:
+ 257               	.LBB119:
+ 258               	.LBB120:
+ 259               	.LBB121:
+ 260               	.LSM49:
+ 261 0008 E2EE      		ldi r30,lo8(226)
+ 262 000a F0E0      		ldi r31,hi8(226)
+ 263 000c 8081      		ld r24,Z
+ 264 000e 8460      		ori r24,lo8(4)
+ 265 0010 8083      		st Z,r24
+ 266               	/* epilogue start */
+ 267               	.LBE121:
+ 268               	.LBE120:
+ 269               	.LBE119:
+ 270               	.LSM50:
+ 271 0012 0895      		ret
+ 272               	.LFE104:
+ 274               		.section	.text.EVENT_USB_Device_UnhandledControlRequest,"ax",@progbits
+ 275               	.global	EVENT_USB_Device_UnhandledControlRequest
+ 277               	EVENT_USB_Device_UnhandledControlRequest:
+ 278               	.LFB105:
+ 279               	.LSM51:
+ 280               	/* prologue: function */
+ 281               	/* frame size = 0 */
+ 282               	/* stack size = 0 */
+ 283               	.L__stack_usage = 0
+ 284               	.LSM52:
+ 285 0000 80E0      		ldi r24,lo8(Joystick_HID_Interface)
+ 286 0002 90E0      		ldi r25,hi8(Joystick_HID_Interface)
+ 287 0004 0E94 0000 		call HID_Device_ProcessControlRequest
+ 288               	/* epilogue start */
+ 289               	.LSM53:
+ 290 0008 0895      		ret
+ 291               	.LFE105:
+ 293               		.section	.text.EVENT_USB_Device_StartOfFrame,"ax",@progbits
+ 294               	.global	EVENT_USB_Device_StartOfFrame
+ 296               	EVENT_USB_Device_StartOfFrame:
+ 297               	.LFB106:
+ 298               	.LSM54:
+ 299               	/* prologue: function */
+ 300               	/* frame size = 0 */
+ 301               	/* stack size = 0 */
+ 302               	.L__stack_usage = 0
+ 303               	.LVL10:
+ 304               	.LBB122:
+ 305               	.LBB123:
+ 306               	.LSM55:
+ 307 0000 8091 0000 		lds r24,Joystick_HID_Interface+11
+ 308 0004 9091 0000 		lds r25,Joystick_HID_Interface+11+1
+ 309 0008 0097      		sbiw r24,0
+ 310 000a 01F0      		breq .L8
+ 311               	.LSM56:
+ 312 000c 0197      		sbiw r24,1
+ 313 000e 9093 0000 		sts Joystick_HID_Interface+11+1,r25
+ 314 0012 8093 0000 		sts Joystick_HID_Interface+11,r24
+ 315               	.L8:
+ 316 0016 0895      		ret
+ 317               	.LBE123:
+ 318               	.LBE122:
+ 319               	.LFE106:
+ 321               		.section	.text.CALLBACK_HID_Device_CreateHIDReport,"ax",@progbits
+ 322               	.global	CALLBACK_HID_Device_CreateHIDReport
+ 324               	CALLBACK_HID_Device_CreateHIDReport:
+ 325               	.LFB107:
+ 326               	.LSM57:
+ 327               	.LVL11:
+ 328 0000 EF92      		push r14
+ 329 0002 FF92      		push r15
+ 330 0004 0F93      		push r16
+ 331 0006 1F93      		push r17
+ 332 0008 DF93      		push r29
+ 333 000a CF93      		push r28
+ 334 000c 00D0      		rcall .
+ 335 000e CDB7      		in r28,__SP_L__
+ 336 0010 DEB7      		in r29,__SP_H__
+ 337               	/* prologue: function */
+ 338               	/* frame size = 2 */
+ 339               	/* stack size = 8 */
+ 340               	.L__stack_usage = 8
+ 341 0012 7B01      		movw r14,r22
+ 342               	.LVL12:
+ 343               	.LBB124:
+ 344               	.LBB125:
+ 345               	.LBB126:
+ 346               	.LBB127:
+ 347               	.LSM58:
+ 348               	.LSM59:
+ 349 0014 4FB7      		in r20,__SREG__
+ 350               	.LVL13:
+ 351               	.LBE127:
+ 352               	.LBE126:
+ 353               	.LBB128:
+ 354               	.LBB129:
+ 355               	.LSM60:
+ 356               	.LSM61:
+ 357               	/* #APP */
+ 358               	 ;  385 "../../../Public/LUFA110528/LUFA/Drivers/USB/../../Common/Common.h" 1
+ 359 0016 F894      		cli
+ 360               	 ;  0 "" 2
+ 361               	.LSM62:
+ 362               	/* #NOAPP */
+ 363               	.LBE129:
+ 364               	.LBE128:
+ 365               	.LSM63:
+ 366 0018 8091 0000 		lds r24,USARTtoUSB_Buffer+9
+ 367 001c 9091 0000 		lds r25,USARTtoUSB_Buffer+9+1
+ 368               	.LVL14:
+ 369               	.LBB130:
+ 370               	.LBB131:
+ 371               	.LSM64:
+ 372               	.LSM65:
+ 373 0020 4FBF      		out __SREG__,r20
+ 374               	.LSM66:
+ 375               	.LBE131:
+ 376               	.LBE130:
+ 377               	.LBE125:
+ 378               	.LBE124:
+ 379               	.LSM67:
+ 380 0022 8930      		cpi r24,9
+ 381 0024 9105      		cpc r25,__zero_reg__
+ 382 0026 00F0      		brlo .L11
+ 383               	.LVL15:
+ 384               	.LSM68:
+ 385 0028 2983      		std Y+1,r18
+ 386 002a 3A83      		std Y+2,r19
+ 387 002c 0E94 0000 		call RingBuffer_Remove.clone.1
+ 388               	.LVL16:
+ 389 0030 F701      		movw r30,r14
+ 390 0032 8083      		st Z,r24
+ 391               	.LSM69:
+ 392 0034 88E0      		ldi r24,lo8(8)
+ 393 0036 90E0      		ldi r25,hi8(8)
+ 394 0038 F801      		movw r30,r16
+ 395 003a 9183      		std Z+1,r25
+ 396 003c 8083      		st Z,r24
+ 397               	.LVL17:
+ 398 003e 2981      		ldd r18,Y+1
+ 399 0040 3A81      		ldd r19,Y+2
+ 400 0042 422F      		mov r20,r18
+ 401 0044 532F      		mov r21,r19
+ 402 0046 7A01      		movw r14,r20
+ 403               	.LVL18:
+ 404               	.LSM70:
+ 405 0048 8701      		movw r16,r14
+ 406               	.LVL19:
+ 407 004a 085F      		subi r16,lo8(-(8))
+ 408 004c 1F4F      		sbci r17,hi8(-(8))
+ 409               	.LVL20:
+ 410               	.L12:
+ 411               	.LBB132:
+ 412               	.LSM71:
+ 413 004e 0E94 0000 		call RingBuffer_Remove.clone.1
+ 414 0052 F701      		movw r30,r14
+ 415 0054 8193      		st Z+,r24
+ 416 0056 7F01      		movw r14,r30
+ 417               	.LSM72:
+ 418 0058 E017      		cp r30,r16
+ 419 005a F107      		cpc r31,r17
+ 420 005c 01F4      		brne .L12
+ 421               	.L11:
+ 422               	.LBE132:
+ 423               	.LSM73:
+ 424 005e 80E0      		ldi r24,lo8(0)
+ 425               	/* epilogue start */
+ 426 0060 0F90      		pop __tmp_reg__
+ 427 0062 0F90      		pop __tmp_reg__
+ 428 0064 CF91      		pop r28
+ 429 0066 DF91      		pop r29
+ 430 0068 1F91      		pop r17
+ 431 006a 0F91      		pop r16
+ 432 006c FF90      		pop r15
+ 433 006e EF90      		pop r14
+ 434 0070 0895      		ret
+ 435               	.LFE107:
+ 437               		.section	.text.CALLBACK_HID_Device_ProcessHIDReport,"ax",@progbits
+ 438               	.global	CALLBACK_HID_Device_ProcessHIDReport
+ 440               	CALLBACK_HID_Device_ProcessHIDReport:
+ 441               	.LFB108:
+ 442               	.LSM74:
+ 443               	.LVL21:
+ 444               	/* prologue: function */
+ 445               	/* frame size = 0 */
+ 446               	/* stack size = 0 */
+ 447               	.L__stack_usage = 0
+ 448               	/* epilogue start */
+ 449               	.LSM75:
+ 450 0000 0895      		ret
+ 451               	.LFE108:
+ 453               		.section	.text.__vector_23,"ax",@progbits
+ 454               	.global	__vector_23
+ 456               	__vector_23:
+ 457               	.LFB109:
+ 458               	.LSM76:
+ 459 0000 1F92      		push __zero_reg__
+ 460 0002 0F92      		push r0
+ 461 0004 0FB6      		in r0,__SREG__
+ 462 0006 0F92      		push r0
+ 463 0008 1124      		clr __zero_reg__
+ 464 000a 2F93      		push r18
+ 465 000c 3F93      		push r19
+ 466 000e 4F93      		push r20
+ 467 0010 8F93      		push r24
+ 468 0012 9F93      		push r25
+ 469 0014 AF93      		push r26
+ 470 0016 BF93      		push r27
+ 471 0018 EF93      		push r30
+ 472 001a FF93      		push r31
+ 473               	/* prologue: Signal */
+ 474               	/* frame size = 0 */
+ 475               	/* stack size = 12 */
+ 476               	.L__stack_usage = 12
+ 477               	.LSM77:
+ 478 001c 4091 CE00 		lds r20,206
+ 479               	.LVL22:
+ 480               	.LSM78:
+ 481 0020 8EB3      		in r24,62-0x20
+ 482 0022 8430      		cpi r24,lo8(4)
+ 483 0024 01F4      		brne .L15
+ 484               	.LVL23:
+ 485               	.LBB133:
+ 486               	.LBB134:
+ 487               	.LBB135:
+ 488               	.LBB136:
+ 489               	.LBB137:
+ 490               	.LBB138:
+ 491               	.LSM79:
+ 492               	.LSM80:
+ 493 0026 8FB7      		in r24,__SREG__
+ 494               	.LBE138:
+ 495               	.LBE137:
+ 496               	.LBB139:
+ 497               	.LBB140:
+ 498               	.LSM81:
+ 499               	.LSM82:
+ 500               	/* #APP */
+ 501               	 ;  385 "../../../Public/LUFA110528/LUFA/Drivers/USB/../../Common/Common.h" 1
+ 502 0028 F894      		cli
+ 503               	 ;  0 "" 2
+ 504               	.LSM83:
+ 505               	/* #NOAPP */
+ 506               	.LBE140:
+ 507               	.LBE139:
+ 508               	.LSM84:
+ 509 002a 2091 0000 		lds r18,USARTtoUSB_Buffer+9
+ 510 002e 3091 0000 		lds r19,USARTtoUSB_Buffer+9+1
+ 511               	.LVL24:
+ 512               	.LBB141:
+ 513               	.LBB142:
+ 514               	.LSM85:
+ 515               	.LSM86:
+ 516 0032 8FBF      		out __SREG__,r24
+ 517               	.LSM87:
+ 518               	.LBE142:
+ 519               	.LBE141:
+ 520               	.LBE136:
+ 521               	.LBE135:
+ 522               	.LSM88:
+ 523 0034 8091 0000 		lds r24,USARTtoUSB_Buffer+8
+ 524               	.LVL25:
+ 525 0038 90E0      		ldi r25,lo8(0)
+ 526               	.LBE134:
+ 527               	.LBE133:
+ 528               	.LSM89:
+ 529 003a 2817      		cp r18,r24
+ 530 003c 3907      		cpc r19,r25
+ 531 003e 01F0      		breq .L15
+ 532               	.LVL26:
+ 533               	.LBB143:
+ 534               	.LBB144:
+ 535               	.LSM90:
+ 536 0040 E0E0      		ldi r30,lo8(USARTtoUSB_Buffer)
+ 537 0042 F0E0      		ldi r31,hi8(USARTtoUSB_Buffer)
+ 538               	.LVL27:
+ 539               	.LSM91:
+ 540 0044 A081      		ld r26,Z
+ 541 0046 B181      		ldd r27,Z+1
+ 542 0048 4C93      		st X,r20
+ 543               	.LSM92:
+ 544 004a 8081      		ld r24,Z
+ 545 004c 9181      		ldd r25,Z+1
+ 546 004e 0196      		adiw r24,1
+ 547 0050 9183      		std Z+1,r25
+ 548 0052 8083      		st Z,r24
+ 549 0054 2681      		ldd r18,Z+6
+ 550 0056 3781      		ldd r19,Z+7
+ 551 0058 8217      		cp r24,r18
+ 552 005a 9307      		cpc r25,r19
+ 553 005c 01F4      		brne .L17
+ 554               	.LSM93:
+ 555 005e 8481      		ldd r24,Z+4
+ 556 0060 9581      		ldd r25,Z+5
+ 557 0062 9183      		std Z+1,r25
+ 558 0064 8083      		st Z,r24
+ 559               	.L17:
+ 560               	.LBB145:
+ 561               	.LBB146:
+ 562               	.LSM94:
+ 563               	.LSM95:
+ 564 0066 2FB7      		in r18,__SREG__
+ 565               	.LBE146:
+ 566               	.LBE145:
+ 567               	.LBB147:
+ 568               	.LBB148:
+ 569               	.LSM96:
+ 570               	.LSM97:
+ 571               	/* #APP */
+ 572               	 ;  385 "../../../Public/LUFA110528/LUFA/Drivers/USB/../../Common/Common.h" 1
+ 573 0068 F894      		cli
+ 574               	 ;  0 "" 2
+ 575               	.LSM98:
+ 576               	/* #NOAPP */
+ 577               	.LBE148:
+ 578               	.LBE147:
+ 579               	.LSM99:
+ 580 006a 8185      		ldd r24,Z+9
+ 581 006c 9285      		ldd r25,Z+10
+ 582 006e 0196      		adiw r24,1
+ 583 0070 9287      		std Z+10,r25
+ 584 0072 8187      		std Z+9,r24
+ 585               	.LVL28:
+ 586               	.LBB149:
+ 587               	.LBB150:
+ 588               	.LSM100:
+ 589               	.LSM101:
+ 590 0074 2FBF      		out __SREG__,r18
+ 591               	.LSM102:
+ 592               	.LVL29:
+ 593               	.L15:
+ 594               	/* epilogue start */
+ 595               	.LBE150:
+ 596               	.LBE149:
+ 597               	.LBE144:
+ 598               	.LBE143:
+ 599               	.LSM103:
+ 600 0076 FF91      		pop r31
+ 601 0078 EF91      		pop r30
+ 602 007a BF91      		pop r27
+ 603 007c AF91      		pop r26
+ 604 007e 9F91      		pop r25
+ 605 0080 8F91      		pop r24
+ 606 0082 4F91      		pop r20
+ 607               	.LVL30:
+ 608 0084 3F91      		pop r19
+ 609 0086 2F91      		pop r18
+ 610 0088 0F90      		pop r0
+ 611 008a 0FBE      		out __SREG__,r0
+ 612 008c 0F90      		pop r0
+ 613 008e 1F90      		pop __zero_reg__
+ 614 0090 1895      		reti
+ 615               	.LFE109:
+ 617               	.global	Joystick_HID_Interface
+ 618               		.data
+ 621               	Joystick_HID_Interface:
+ 622 0000 00        		.byte	0
+ 623 0001 01        		.byte	1
+ 624 0002 0800      		.word	8
+ 625 0004 00        		.byte	0
+ 626 0005 0000      		.word	PrevJoystickHIDReportBuffer
+ 627 0007 08        		.byte	8
+ 628 0008 0000 0000 		.skip 5,0
+ 628      00
+ 629               		.comm PrevJoystickHIDReportBuffer,8,1
+ 630               		.comm USARTtoUSB_Buffer,11,1
+ 631               		.comm BufferData,72,1
+ 720               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Arduino-joystick.c
+     /tmp/ccW3LTg3.s:2      *ABS*:000000000000003f __SREG__
+     /tmp/ccW3LTg3.s:3      *ABS*:000000000000003e __SP_H__
+     /tmp/ccW3LTg3.s:4      *ABS*:000000000000003d __SP_L__
+     /tmp/ccW3LTg3.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccW3LTg3.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccW3LTg3.s:19     .text.RingBuffer_Remove.clone.1:0000000000000000 RingBuffer_Remove.clone.1
+                            *COM*:000000000000000b USARTtoUSB_Buffer
+     /tmp/ccW3LTg3.s:93     .text.SetupHardware:0000000000000000 SetupHardware
+     /tmp/ccW3LTg3.s:157    .text.main:0000000000000000 main
+                            *COM*:0000000000000048 BufferData
+     /tmp/ccW3LTg3.s:621    .data:0000000000000000 Joystick_HID_Interface
+     /tmp/ccW3LTg3.s:245    .text.EVENT_USB_Device_ConfigurationChanged:0000000000000000 EVENT_USB_Device_ConfigurationChanged
+     /tmp/ccW3LTg3.s:277    .text.EVENT_USB_Device_UnhandledControlRequest:0000000000000000 EVENT_USB_Device_UnhandledControlRequest
+     /tmp/ccW3LTg3.s:296    .text.EVENT_USB_Device_StartOfFrame:0000000000000000 EVENT_USB_Device_StartOfFrame
+     /tmp/ccW3LTg3.s:324    .text.CALLBACK_HID_Device_CreateHIDReport:0000000000000000 CALLBACK_HID_Device_CreateHIDReport
+     /tmp/ccW3LTg3.s:440    .text.CALLBACK_HID_Device_ProcessHIDReport:0000000000000000 CALLBACK_HID_Device_ProcessHIDReport
+     /tmp/ccW3LTg3.s:456    .text.__vector_23:0000000000000000 __vector_23
+                            *COM*:0000000000000008 PrevJoystickHIDReportBuffer
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+USB_Init
+HID_Device_USBTask
+USB_USBTask
+HID_Device_ConfigureEndpoints
+HID_Device_ProcessControlRequest

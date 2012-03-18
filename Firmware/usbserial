@@ -1,0 +1,11 @@
+#! /bin/bash
+
+echo "Flash atmega8u2 with Arduino USBserial? Ensure the programmer is correctly plugged in before saying yes."
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) sudo avrdude -c usbtiny -F -B 1 -p at90usb82 -U flash:w:atmega8u2/arduino-usbserial/Arduino-usbserial-uno.hex; break;;
+        No ) exit;;
+    esac
+done
+
+

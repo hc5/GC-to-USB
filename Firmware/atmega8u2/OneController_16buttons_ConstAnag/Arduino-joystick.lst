@@ -1,0 +1,579 @@
+   1               		.file	"Arduino-joystick.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.global __do_copy_data
+   8               		.global __do_clear_bss
+  16               	.Ltext0:
+  17               		.section	.text.SetupHardware,"ax",@progbits
+  18               	.global	SetupHardware
+  20               	SetupHardware:
+  21               	.LFB85:
+  22               	.LSM0:
+  23 0000 CF93      		push r28
+  24 0002 DF93      		push r29
+  25               	/* prologue: function */
+  26               	/* frame size = 0 */
+  27               	/* stack size = 2 */
+  28               	.L__stack_usage = 2
+  29               	.LSM1:
+  30 0004 84B7      		in r24,84-0x20
+  31 0006 877F      		andi r24,lo8(-9)
+  32 0008 84BF      		out 84-0x20,r24
+  33               	.LSM2:
+  34 000a 28E1      		ldi r18,lo8(24)
+  35               	/* #APP */
+  36               	 ;  116 "Arduino-joystick.c" 1
+  37 000c 0FB6      		in __tmp_reg__, __SREG__
+  38 000e F894      		cli
+  39 0010 2093 6000 		sts 96, r18
+  40 0014 1092 6000 		sts 96, __zero_reg__
+  41 0018 0FBE      		out __SREG__,__tmp_reg__
+  42               		
+  43               	 ;  0 "" 2
+  44               	.LVL0:
+  45               	/* #NOAPP */
+  46               	.LBB99:
+  47               	.LBB100:
+  48               	.LSM3:
+  49 001a 80E1      		ldi r24,lo8(16)
+  50 001c 90E0      		ldi r25,hi8(16)
+  51 001e 9093 CD00 		sts 204+1,r25
+  52 0022 8093 CC00 		sts 204,r24
+  53               	.LSM4:
+  54 0026 86E0      		ldi r24,lo8(6)
+  55 0028 8093 CA00 		sts 202,r24
+  56               	.LSM5:
+  57 002c 82E0      		ldi r24,lo8(2)
+  58 002e 8093 C800 		sts 200,r24
+  59               	.LSM6:
+  60 0032 C9EC      		ldi r28,lo8(201)
+  61 0034 D0E0      		ldi r29,hi8(201)
+  62 0036 2883      		st Y,r18
+  63               	.LSM7:
+  64 0038 539A      		sbi 42-0x20,3
+  65               	.LSM8:
+  66 003a 5A9A      		sbi 43-0x20,2
+  67               	.LBE100:
+  68               	.LBE99:
+  69               	.LBB101:
+  70               	.LBB102:
+  71               	.LSM9:
+  72 003c 8AB1      		in r24,42-0x20
+  73 003e 8063      		ori r24,lo8(48)
+  74 0040 8AB9      		out 42-0x20,r24
+  75               	.LSM10:
+  76 0042 8BB1      		in r24,43-0x20
+  77 0044 8063      		ori r24,lo8(48)
+  78 0046 8BB9      		out 43-0x20,r24
+  79               	.LBE102:
+  80               	.LBE101:
+  81               	.LSM11:
+  82 0048 0E94 0000 		call USB_Init
+  83               	.LSM12:
+  84 004c 88E9      		ldi r24,lo8(-104)
+  85 004e 8883      		st Y,r24
+  86               	/* epilogue start */
+  87               	.LSM13:
+  88 0050 DF91      		pop r29
+  89 0052 CF91      		pop r28
+  90 0054 0895      		ret
+  91               	.LFE85:
+  93               		.section	.text.main,"ax",@progbits
+  94               	.global	main
+  96               	main:
+  97               	.LFB84:
+  98               	.LSM14:
+  99               	/* prologue: function */
+ 100               	/* frame size = 0 */
+ 101               	/* stack size = 0 */
+ 102               	.L__stack_usage = 0
+ 103               	.LSM15:
+ 104 0000 0E94 0000 		call SetupHardware
+ 105               	.LVL1:
+ 106               	.LBB103:
+ 107               	.LBB104:
+ 108               	.LSM16:
+ 109 0004 2FB7      		in r18,__SREG__
+ 110               	.LVL2:
+ 111               	.LBB105:
+ 112               	.LBB106:
+ 113               	.LSM17:
+ 114               	/* #APP */
+ 115               	 ;  50 "/usr/local/lib/gcc/avr/4.5.3/../../../../avr/include/util/atomic.h" 1
+ 116 0006 F894      		cli
+ 117               	 ;  0 "" 2
+ 118               	.LVL3:
+ 119               	/* #NOAPP */
+ 120               	.LBE106:
+ 121               	.LBE105:
+ 122               	.LSM18:
+ 123 0008 80E0      		ldi r24,lo8(USARTtoUSB_Buffer)
+ 124 000a 90E0      		ldi r25,hi8(USARTtoUSB_Buffer)
+ 125 000c 9093 0000 		sts USARTtoUSB_Buffer+128+1,r25
+ 126 0010 8093 0000 		sts USARTtoUSB_Buffer+128,r24
+ 127               	.LSM19:
+ 128 0014 9093 0000 		sts USARTtoUSB_Buffer+130+1,r25
+ 129 0018 8093 0000 		sts USARTtoUSB_Buffer+130,r24
+ 130               	.LVL4:
+ 131               	.LBB107:
+ 132               	.LBB108:
+ 133               	.LSM20:
+ 134 001c 2FBF      		out __SREG__,r18
+ 135               	.LSM21:
+ 136               	.LBE108:
+ 137               	.LBE107:
+ 138               	.LBE104:
+ 139               	.LBE103:
+ 140               	.LSM22:
+ 141               	/* #APP */
+ 142               	 ;  103 "Arduino-joystick.c" 1
+ 143 001e 7894      		sei
+ 144               	 ;  0 "" 2
+ 145               	.LVL5:
+ 146               	/* #NOAPP */
+ 147               	.L3:
+ 148               	.LSM23:
+ 149 0020 80E0      		ldi r24,lo8(Joystick_HID_Interface)
+ 150 0022 90E0      		ldi r25,hi8(Joystick_HID_Interface)
+ 151 0024 0E94 0000 		call HID_Device_USBTask
+ 152               	.LSM24:
+ 153 0028 0E94 0000 		call USB_USBTask
+ 154 002c 00C0      		rjmp .L3
+ 155               	.LFE84:
+ 157               		.section	.text.EVENT_USB_Device_Connect,"ax",@progbits
+ 158               	.global	EVENT_USB_Device_Connect
+ 160               	EVENT_USB_Device_Connect:
+ 161               	.LFB86:
+ 162               	.LSM25:
+ 163               	/* prologue: function */
+ 164               	/* frame size = 0 */
+ 165               	/* stack size = 0 */
+ 166               	.L__stack_usage = 0
+ 167               	/* epilogue start */
+ 168               	.LSM26:
+ 169 0000 0895      		ret
+ 170               	.LFE86:
+ 172               		.section	.text.EVENT_USB_Device_Disconnect,"ax",@progbits
+ 173               	.global	EVENT_USB_Device_Disconnect
+ 175               	EVENT_USB_Device_Disconnect:
+ 176               	.LFB87:
+ 177               	.LSM27:
+ 178               	/* prologue: function */
+ 179               	/* frame size = 0 */
+ 180               	/* stack size = 0 */
+ 181               	.L__stack_usage = 0
+ 182               	/* epilogue start */
+ 183               	.LSM28:
+ 184 0000 0895      		ret
+ 185               	.LFE87:
+ 187               		.section	.text.EVENT_USB_Device_ConfigurationChanged,"ax",@progbits
+ 188               	.global	EVENT_USB_Device_ConfigurationChanged
+ 190               	EVENT_USB_Device_ConfigurationChanged:
+ 191               	.LFB88:
+ 192               	.LSM29:
+ 193               	/* prologue: function */
+ 194               	/* frame size = 0 */
+ 195               	/* stack size = 0 */
+ 196               	.L__stack_usage = 0
+ 197               	.LSM30:
+ 198 0000 80E0      		ldi r24,lo8(Joystick_HID_Interface)
+ 199 0002 90E0      		ldi r25,hi8(Joystick_HID_Interface)
+ 200 0004 0E94 0000 		call HID_Device_ConfigureEndpoints
+ 201               	.LBB109:
+ 202               	.LBB110:
+ 203               	.LSM31:
+ 204 0008 E2EE      		ldi r30,lo8(226)
+ 205 000a F0E0      		ldi r31,hi8(226)
+ 206 000c 8081      		ld r24,Z
+ 207 000e 8460      		ori r24,lo8(4)
+ 208 0010 8083      		st Z,r24
+ 209               	/* epilogue start */
+ 210               	.LBE110:
+ 211               	.LBE109:
+ 212               	.LSM32:
+ 213 0012 0895      		ret
+ 214               	.LFE88:
+ 216               		.section	.text.EVENT_USB_Device_UnhandledControlRequest,"ax",@progbits
+ 217               	.global	EVENT_USB_Device_UnhandledControlRequest
+ 219               	EVENT_USB_Device_UnhandledControlRequest:
+ 220               	.LFB89:
+ 221               	.LSM33:
+ 222               	/* prologue: function */
+ 223               	/* frame size = 0 */
+ 224               	/* stack size = 0 */
+ 225               	.L__stack_usage = 0
+ 226               	.LSM34:
+ 227 0000 80E0      		ldi r24,lo8(Joystick_HID_Interface)
+ 228 0002 90E0      		ldi r25,hi8(Joystick_HID_Interface)
+ 229 0004 0E94 0000 		call HID_Device_ProcessControlRequest
+ 230               	/* epilogue start */
+ 231               	.LSM35:
+ 232 0008 0895      		ret
+ 233               	.LFE89:
+ 235               		.section	.text.EVENT_USB_Device_StartOfFrame,"ax",@progbits
+ 236               	.global	EVENT_USB_Device_StartOfFrame
+ 238               	EVENT_USB_Device_StartOfFrame:
+ 239               	.LFB90:
+ 240               	.LSM36:
+ 241               	/* prologue: function */
+ 242               	/* frame size = 0 */
+ 243               	/* stack size = 0 */
+ 244               	.L__stack_usage = 0
+ 245               	.LVL6:
+ 246               	.LBB111:
+ 247               	.LBB112:
+ 248               	.LSM37:
+ 249 0000 8091 0000 		lds r24,Joystick_HID_Interface+11
+ 250 0004 9091 0000 		lds r25,Joystick_HID_Interface+11+1
+ 251 0008 0097      		sbiw r24,0
+ 252 000a 01F0      		breq .L8
+ 253               	.LSM38:
+ 254 000c 0197      		sbiw r24,1
+ 255 000e 9093 0000 		sts Joystick_HID_Interface+11+1,r25
+ 256 0012 8093 0000 		sts Joystick_HID_Interface+11,r24
+ 257               	.L8:
+ 258 0016 0895      		ret
+ 259               	.LBE112:
+ 260               	.LBE111:
+ 261               	.LFE90:
+ 263               		.section	.text.CALLBACK_HID_Device_CreateHIDReport,"ax",@progbits
+ 264               	.global	CALLBACK_HID_Device_CreateHIDReport
+ 266               	CALLBACK_HID_Device_CreateHIDReport:
+ 267               	.LFB91:
+ 268               	.LSM39:
+ 269               	.LVL7:
+ 270 0000 0F93      		push r16
+ 271 0002 1F93      		push r17
+ 272 0004 CF93      		push r28
+ 273 0006 DF93      		push r29
+ 274               	/* prologue: function */
+ 275               	/* frame size = 0 */
+ 276               	/* stack size = 4 */
+ 277               	.L__stack_usage = 4
+ 278 0008 E801      		movw r28,r16
+ 279               	.LBB113:
+ 280               	.LBB114:
+ 281               	.LBB115:
+ 282               	.LSM40:
+ 283 000a 9FB7      		in r25,__SREG__
+ 284               	.LVL8:
+ 285               	.LBB116:
+ 286               	.LBB117:
+ 287               	.LSM41:
+ 288               	/* #APP */
+ 289               	 ;  50 "/usr/local/lib/gcc/avr/4.5.3/../../../../avr/include/util/atomic.h" 1
+ 290 000c F894      		cli
+ 291               	 ;  0 "" 2
+ 292               	.LVL9:
+ 293               	/* #NOAPP */
+ 294               	.LBE117:
+ 295               	.LBE116:
+ 296               	.LSM42:
+ 297 000e 8091 0000 		lds r24,USARTtoUSB_Buffer+132
+ 298               	.LVL10:
+ 299               	.LBB118:
+ 300               	.LBB119:
+ 301               	.LSM43:
+ 302 0012 9FBF      		out __SREG__,r25
+ 303               	.LSM44:
+ 304               	.LBE119:
+ 305               	.LBE118:
+ 306               	.LBE115:
+ 307               	.LBE114:
+ 308               	.LBE113:
+ 309               	.LSM45:
+ 310 0014 8830      		cpi r24,lo8(8)
+ 311 0016 00F0      		brlo .L11
+ 312 0018 A0E0      		ldi r26,lo8(joyReport)
+ 313 001a B0E0      		ldi r27,hi8(joyReport)
+ 314               	.LBB120:
+ 315               	.LBB121:
+ 316               	.LBB122:
+ 317               	.LSM46:
+ 318 001c 80E0      		ldi r24,lo8(USARTtoUSB_Buffer)
+ 319 001e 90E0      		ldi r25,hi8(USARTtoUSB_Buffer)
+ 320               	.LVL11:
+ 321               	.L13:
+ 322               	.LSM47:
+ 323 0020 E091 0000 		lds r30,USARTtoUSB_Buffer+130
+ 324 0024 F091 0000 		lds r31,USARTtoUSB_Buffer+130+1
+ 325 0028 5191      		ld r21,Z+
+ 326               	.LVL12:
+ 327               	.LSM48:
+ 328 002a F093 0000 		sts USARTtoUSB_Buffer+130+1,r31
+ 329 002e E093 0000 		sts USARTtoUSB_Buffer+130,r30
+ 330 0032 40E0      		ldi r20,hi8(USARTtoUSB_Buffer+128)
+ 331 0034 E030      		cpi r30,lo8(USARTtoUSB_Buffer+128)
+ 332 0036 F407      		cpc r31,r20
+ 333 0038 01F4      		brne .L12
+ 334               	.LSM49:
+ 335 003a 9093 0000 		sts USARTtoUSB_Buffer+130+1,r25
+ 336 003e 8093 0000 		sts USARTtoUSB_Buffer+130,r24
+ 337               	.L12:
+ 338               	.LBB123:
+ 339               	.LSM50:
+ 340 0042 6FB7      		in r22,__SREG__
+ 341               	.LVL13:
+ 342               	.LBB124:
+ 343               	.LBB125:
+ 344               	.LSM51:
+ 345               	/* #APP */
+ 346               	 ;  50 "/usr/local/lib/gcc/avr/4.5.3/../../../../avr/include/util/atomic.h" 1
+ 347 0044 F894      		cli
+ 348               	 ;  0 "" 2
+ 349               	.LVL14:
+ 350               	/* #NOAPP */
+ 351               	.LBE125:
+ 352               	.LBE124:
+ 353               	.LSM52:
+ 354 0046 4091 0000 		lds r20,USARTtoUSB_Buffer+132
+ 355 004a 4150      		subi r20,lo8(-(-1))
+ 356 004c 4093 0000 		sts USARTtoUSB_Buffer+132,r20
+ 357               	.LVL15:
+ 358               	.LBB126:
+ 359               	.LBB127:
+ 360               	.LSM53:
+ 361 0050 6FBF      		out __SREG__,r22
+ 362               	.LSM54:
+ 363               	.LBE127:
+ 364               	.LBE126:
+ 365               	.LBE123:
+ 366               	.LBE122:
+ 367               	.LBE121:
+ 368               	.LSM55:
+ 369 0052 5D93      		st X+,r21
+ 370               	.LSM56:
+ 371 0054 40E0      		ldi r20,hi8(joyReport+8)
+ 372 0056 A030      		cpi r26,lo8(joyReport+8)
+ 373 0058 B407      		cpc r27,r20
+ 374 005a 01F4      		brne .L13
+ 375               	.LVL16:
+ 376               	.L11:
+ 377               	.LBE120:
+ 378               	.LSM57:
+ 379 005c 822F      		mov r24,r18
+ 380 005e 932F      		mov r25,r19
+ 381               	.LVL17:
+ 382 0060 DC01      		movw r26,r24
+ 383 0062 E0E0      		ldi r30,lo8(joyReport)
+ 384 0064 F0E0      		ldi r31,hi8(joyReport)
+ 385 0066 88E0      		ldi r24,lo8(8)
+ 386               	.L14:
+ 387 0068 0190      		ld r0,Z+
+ 388 006a 0D92      		st X+,r0
+ 389 006c 8150      		subi r24,lo8(-(-1))
+ 390 006e 01F4      		brne .L14
+ 391               	.LSM58:
+ 392 0070 88E0      		ldi r24,lo8(8)
+ 393 0072 90E0      		ldi r25,hi8(8)
+ 394 0074 9983      		std Y+1,r25
+ 395 0076 8883      		st Y,r24
+ 396               	.LSM59:
+ 397 0078 80E0      		ldi r24,lo8(0)
+ 398               	/* epilogue start */
+ 399 007a DF91      		pop r29
+ 400 007c CF91      		pop r28
+ 401 007e 1F91      		pop r17
+ 402 0080 0F91      		pop r16
+ 403               	.LVL18:
+ 404 0082 0895      		ret
+ 405               	.LFE91:
+ 407               		.section	.text.CALLBACK_HID_Device_ProcessHIDReport,"ax",@progbits
+ 408               	.global	CALLBACK_HID_Device_ProcessHIDReport
+ 410               	CALLBACK_HID_Device_ProcessHIDReport:
+ 411               	.LFB92:
+ 412               	.LSM60:
+ 413               	.LVL19:
+ 414               	/* prologue: function */
+ 415               	/* frame size = 0 */
+ 416               	/* stack size = 0 */
+ 417               	.L__stack_usage = 0
+ 418               	/* epilogue start */
+ 419               	.LSM61:
+ 420 0000 0895      		ret
+ 421               	.LFE92:
+ 423               		.section	.text.__vector_23,"ax",@progbits
+ 424               	.global	__vector_23
+ 426               	__vector_23:
+ 427               	.LFB93:
+ 428               	.LSM62:
+ 429 0000 1F92      		push __zero_reg__
+ 430 0002 0F92      		push r0
+ 431 0004 0FB6      		in r0,__SREG__
+ 432 0006 0F92      		push r0
+ 433 0008 1124      		clr __zero_reg__
+ 434 000a 2F93      		push r18
+ 435 000c 8F93      		push r24
+ 436 000e 9F93      		push r25
+ 437 0010 EF93      		push r30
+ 438 0012 FF93      		push r31
+ 439               	/* prologue: Signal */
+ 440               	/* frame size = 0 */
+ 441               	/* stack size = 8 */
+ 442               	.L__stack_usage = 8
+ 443               	.LSM63:
+ 444 0014 8091 CE00 		lds r24,206
+ 445               	.LVL20:
+ 446               	.LSM64:
+ 447 0018 9EB3      		in r25,62-0x20
+ 448 001a 9430      		cpi r25,lo8(4)
+ 449 001c 01F4      		brne .L18
+ 450               	.LBB128:
+ 451               	.LBB129:
+ 452               	.LBB130:
+ 453               	.LBB131:
+ 454               	.LSM65:
+ 455 001e 2FB7      		in r18,__SREG__
+ 456               	.LVL21:
+ 457               	.LBB132:
+ 458               	.LBB133:
+ 459               	.LSM66:
+ 460               	/* #APP */
+ 461               	 ;  50 "/usr/local/lib/gcc/avr/4.5.3/../../../../avr/include/util/atomic.h" 1
+ 462 0020 F894      		cli
+ 463               	 ;  0 "" 2
+ 464               	.LVL22:
+ 465               	/* #NOAPP */
+ 466               	.LBE133:
+ 467               	.LBE132:
+ 468               	.LSM67:
+ 469 0022 9091 0000 		lds r25,USARTtoUSB_Buffer+132
+ 470               	.LVL23:
+ 471               	.LBB134:
+ 472               	.LBB135:
+ 473               	.LSM68:
+ 474 0026 2FBF      		out __SREG__,r18
+ 475               	.LSM69:
+ 476               	.LBE135:
+ 477               	.LBE134:
+ 478               	.LBE131:
+ 479               	.LBE130:
+ 480               	.LBE129:
+ 481               	.LBE128:
+ 482               	.LSM70:
+ 483 0028 9038      		cpi r25,lo8(-128)
+ 484 002a 01F0      		breq .L18
+ 485               	.LVL24:
+ 486               	.LBB136:
+ 487               	.LBB137:
+ 488               	.LSM71:
+ 489 002c E091 0000 		lds r30,USARTtoUSB_Buffer+128
+ 490 0030 F091 0000 		lds r31,USARTtoUSB_Buffer+128+1
+ 491 0034 8083      		st Z,r24
+ 492               	.LSM72:
+ 493 0036 E091 0000 		lds r30,USARTtoUSB_Buffer+128
+ 494 003a F091 0000 		lds r31,USARTtoUSB_Buffer+128+1
+ 495 003e CF01      		movw r24,r30
+ 496               	.LVL25:
+ 497 0040 0196      		adiw r24,1
+ 498 0042 9093 0000 		sts USARTtoUSB_Buffer+128+1,r25
+ 499 0046 8093 0000 		sts USARTtoUSB_Buffer+128,r24
+ 500 004a 20E0      		ldi r18,hi8(USARTtoUSB_Buffer+128)
+ 501 004c 8030      		cpi r24,lo8(USARTtoUSB_Buffer+128)
+ 502 004e 9207      		cpc r25,r18
+ 503               	.LVL26:
+ 504 0050 01F4      		brne .L20
+ 505               	.LSM73:
+ 506 0052 80E0      		ldi r24,lo8(USARTtoUSB_Buffer)
+ 507 0054 90E0      		ldi r25,hi8(USARTtoUSB_Buffer)
+ 508 0056 9283      		std Z+2,r25
+ 509 0058 8183      		std Z+1,r24
+ 510               	.L20:
+ 511               	.LBB138:
+ 512               	.LSM74:
+ 513 005a 9FB7      		in r25,__SREG__
+ 514               	.LVL27:
+ 515               	.LBB139:
+ 516               	.LBB140:
+ 517               	.LSM75:
+ 518               	/* #APP */
+ 519               	 ;  50 "/usr/local/lib/gcc/avr/4.5.3/../../../../avr/include/util/atomic.h" 1
+ 520 005c F894      		cli
+ 521               	 ;  0 "" 2
+ 522               	.LVL28:
+ 523               	/* #NOAPP */
+ 524               	.LBE140:
+ 525               	.LBE139:
+ 526               	.LSM76:
+ 527 005e 8091 0000 		lds r24,USARTtoUSB_Buffer+132
+ 528 0062 8F5F      		subi r24,lo8(-(1))
+ 529 0064 8093 0000 		sts USARTtoUSB_Buffer+132,r24
+ 530               	.LVL29:
+ 531               	.LBB141:
+ 532               	.LBB142:
+ 533               	.LSM77:
+ 534 0068 9FBF      		out __SREG__,r25
+ 535               	.LSM78:
+ 536               	.LVL30:
+ 537               	.L18:
+ 538               	/* epilogue start */
+ 539               	.LBE142:
+ 540               	.LBE141:
+ 541               	.LBE138:
+ 542               	.LBE137:
+ 543               	.LBE136:
+ 544               	.LSM79:
+ 545 006a FF91      		pop r31
+ 546 006c EF91      		pop r30
+ 547 006e 9F91      		pop r25
+ 548 0070 8F91      		pop r24
+ 549 0072 2F91      		pop r18
+ 550 0074 0F90      		pop r0
+ 551 0076 0FBE      		out __SREG__,r0
+ 552 0078 0F90      		pop r0
+ 553 007a 1F90      		pop __zero_reg__
+ 554 007c 1895      		reti
+ 555               	.LFE93:
+ 557               	.global	Joystick_HID_Interface
+ 558               		.data
+ 561               	Joystick_HID_Interface:
+ 562 0000 00        		.byte	0
+ 563 0001 01        		.byte	1
+ 564 0002 0800      		.word	8
+ 565 0004 00        		.byte	0
+ 566 0005 0000      		.word	PrevJoystickHIDReportBuffer
+ 567 0007 08        		.byte	8
+ 568 0008 0000 0000 		.skip 5,0
+ 568      00
+ 569               	.global	joyReport
+ 570               	.global	joyReport
+ 571               		.section .bss
+ 574               	joyReport:
+ 575 0000 0000 0000 		.skip 8,0
+ 575      0000 0000 
+ 576               		.comm PrevJoystickHIDReportBuffer,8,1
+ 577               		.comm USARTtoUSB_Buffer,133,1
+ 674               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Arduino-joystick.c
+     /tmp/ccnOV0nf.s:2      *ABS*:000000000000003f __SREG__
+     /tmp/ccnOV0nf.s:3      *ABS*:000000000000003e __SP_H__
+     /tmp/ccnOV0nf.s:4      *ABS*:000000000000003d __SP_L__
+     /tmp/ccnOV0nf.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccnOV0nf.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccnOV0nf.s:20     .text.SetupHardware:0000000000000000 SetupHardware
+     /tmp/ccnOV0nf.s:96     .text.main:0000000000000000 main
+                            *COM*:0000000000000085 USARTtoUSB_Buffer
+     /tmp/ccnOV0nf.s:561    .data:0000000000000000 Joystick_HID_Interface
+     /tmp/ccnOV0nf.s:160    .text.EVENT_USB_Device_Connect:0000000000000000 EVENT_USB_Device_Connect
+     /tmp/ccnOV0nf.s:175    .text.EVENT_USB_Device_Disconnect:0000000000000000 EVENT_USB_Device_Disconnect
+     /tmp/ccnOV0nf.s:190    .text.EVENT_USB_Device_ConfigurationChanged:0000000000000000 EVENT_USB_Device_ConfigurationChanged
+     /tmp/ccnOV0nf.s:219    .text.EVENT_USB_Device_UnhandledControlRequest:0000000000000000 EVENT_USB_Device_UnhandledControlRequest
+     /tmp/ccnOV0nf.s:238    .text.EVENT_USB_Device_StartOfFrame:0000000000000000 EVENT_USB_Device_StartOfFrame
+     /tmp/ccnOV0nf.s:266    .text.CALLBACK_HID_Device_CreateHIDReport:0000000000000000 CALLBACK_HID_Device_CreateHIDReport
+     /tmp/ccnOV0nf.s:574    .bss:0000000000000000 joyReport
+     /tmp/ccnOV0nf.s:410    .text.CALLBACK_HID_Device_ProcessHIDReport:0000000000000000 CALLBACK_HID_Device_ProcessHIDReport
+     /tmp/ccnOV0nf.s:426    .text.__vector_23:0000000000000000 __vector_23
+                            *COM*:0000000000000008 PrevJoystickHIDReportBuffer
+
+UNDEFINED SYMBOLS
+__do_copy_data
+__do_clear_bss
+USB_Init
+HID_Device_USBTask
+USB_USBTask
+HID_Device_ConfigureEndpoints
+HID_Device_ProcessControlRequest
